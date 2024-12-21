@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Validate required elements
   if (!elements.form || !elements.form.querySelector('input[type="file"]')) {
-    console.error("Required form elements not found");
+    console.error("未找到所需的表单元素");
     return;
   }
 
@@ -84,13 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function validateFile() {
     if (!fileInput.files || !fileInput.files.length) {
-      showError("Please select an image file first");
+      showError("请选择一个图像文件");
       return false;
     }
 
     const file = fileInput.files[0];
     if (file.size > MAX_FILE_SIZE) {
-      showError("File size exceeds 32MB limit");
+      showError("文件大小超出 32MB 限制");
       return false;
     }
 
@@ -140,12 +140,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || "Processing failed");
+        throw new Error(errorData.error?.message || "处理失败");
       }
 
       await handleSuccess(response, elements.formatSelect?.value || "jpeg");
     } catch (error) {
-      showError(error.message || "Failed to process image");
+      showError(error.message || "图像处理失败");
     } finally {
       hideProgress();
       if (submitButton) submitButton.disabled = false;
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function handleSuccess(response, format) {
     if (!elements.result) {
-      console.error("Result element not found");
+      console.error("未找到结果元素");
       return;
     }
 
@@ -202,11 +202,11 @@ document.addEventListener("DOMContentLoaded", function () {
       resultPreview.innerHTML = `<img src="${url}" alt="Processed image" class="max-w-full rounded-lg">`;
       resultInfo.innerHTML = `
         <div class="flex justify-between items-center">
-          <p class="text-sm text-gray-600">Size: ${(blob.size / 1024).toFixed(2)} KB</p>
+          <p class="text-sm text-gray-600">文件大小: ${(blob.size / 1024).toFixed(2)} KB</p>
           <a href="${url}" 
              download="processed.${format}" 
              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Download Image
+            下载图片
           </a>
         </div>
       `;
