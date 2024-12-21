@@ -15,6 +15,8 @@
 具体翻译了哪些内容,请阅读[翻译说明](./翻译说明.md)
 
 # 使用说明
+
+## 替换汉化文件
 下载本项目的`24.12.20`的发行版文件,将其中的`components`、`js`、`pages`目录映射到容器中的`/app/templates/`目录中的同名目录。
 
 挂载示例
@@ -48,6 +50,36 @@ services:
       - /templates/components:/app/templates/components
       - /templates/js:/app/templates/js
       - /templates/pages:/app/templates/pages
+```
+
+## 直接使用我编译的镜像
+可以直接下载并使用我编译的汉化镜像,镜像在发行的额版本中
+部署示例
+```yml
+services:
+  reubah:
+    container_name: reubah
+    image: firfe/reubah:24.12.20
+    network_mode: bridge
+    restart: always
+    tty: true
+    stdin_open: true
+    cpus: 1
+    mem_limit: 512m
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: "3"
+    environment:
+      TZ: Asia/Shanghai
+      TIME_ZONE: Asia/Shanghai
+      PORT: 端口
+    ports:
+      - 端口:端口
+    volumes:
+      - 缓存:/app/tmp
+      - 文档缓存:/tmp
 ```
 
 # 微信
