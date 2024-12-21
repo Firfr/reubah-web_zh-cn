@@ -1,0 +1,14 @@
+# 忽略所有 .log 文件
+*.log
+
+# 忽略所有 .tmp 文件
+*.tmp
+
+# 忽略 node_modules 文件夹
+node_modules/
+
+# 忽略所有的 .git 文件夹
+.git/
+
+# 忽略所有 .DS_Store 文件（适用于Mac）
+.DS_Store

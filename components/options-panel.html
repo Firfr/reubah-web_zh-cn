@@ -1,0 +1,157 @@
+{{ define "options-panel" }}
+<div class="bg-white p-6 rounded-lg shadow">
+    <div class="space-y-6">
+        <div class="pb-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Basic Options</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="group cursor-pointer">
+                    <label for="formatSelect" class="block text-sm font-medium text-gray-700 mb-1 cursor-pointer">
+                        <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Output Format
+                        </span>
+                    </label>
+                    <div class="relative">
+                        <select id="formatSelect" name="format" class="appearance-none cursor-pointer mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 bg-white hover:border-indigo-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm transition-colors">
+                            <optgroup label="Image Formats">
+                                <option value="jpeg">JPEG - Best for photos</option>
+                                <option value="png">PNG - Best for graphics</option>
+                                <option value="webp">WebP - Modern web format</option>
+                                <option value="gif">GIF - Simple animations</option>
+                                <option value="bmp">BMP - Basic format</option>
+                            </optgroup>
+                            <optgroup label="Document Formats">
+                                <option value="pdf">PDF - Portable Document Format</option>
+                            </optgroup>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <label for="qualitySelect" class="block text-sm font-medium text-gray-700 mb-1 cursor-pointer">
+                        <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                            Quality Level
+                        </span>
+                    </label>
+                    <div class="relative">
+                        <select id="qualitySelect" name="quality" class="appearance-none cursor-pointer mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 bg-white hover:border-indigo-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm transition-colors">
+                            <option value="lossless">Lossless - Perfect quality</option>
+                            <option value="high">High - 90% quality</option>
+                            <option value="medium" selected>Medium - 75% quality</option>
+                            <option value="low">Low - 60% quality</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">
+                <span class="flex items-center gap-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                    Resize Image
+                </span>
+            </h3>
+            <div class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="relative group">
+                        <label for="widthInput" class="block text-sm font-medium text-gray-700 mb-1">Width</label>
+                        <input type="number" 
+                               id="widthInput" 
+                               name="width" 
+                               min="1" 
+                               max="8192" 
+                               placeholder="Width (px)"
+                               class="mt-1 block w-full pl-3 pr-10 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 hover:border-indigo-300 transition-colors">
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500 mt-7">px</span>
+                    </div>
+                    <div class="relative group">
+                        <label for="heightInput" class="block text-sm font-medium text-gray-700 mb-1">Height</label>
+                        <input type="number" 
+                               id="heightInput" 
+                               name="height" 
+                               min="1" 
+                               max="8192" 
+                               placeholder="Height (px)"
+                               class="mt-1 block w-full pl-3 pr-10 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 hover:border-indigo-300 transition-colors">
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500 mt-7">px</span>
+                    </div>
+                </div>
+                <div class="relative cursor-pointer">
+                    <select id="resizeModeSelect" name="resizeMode" class="appearance-none cursor-pointer block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm hover:border-indigo-300 transition-colors">
+                        <option value="fit" selected>Fit - Maintain aspect ratio</option>
+                        <option value="fill">Fill - Crop to fit</option>
+                        <option value="stretch">Stretch - Exact dimensions</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-500">Leave dimensions empty to maintain original size</p>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="text-lg font-medium text-gray-900">Advanced Options</h3>
+            <div class="space-y-4">
+                <label for="optimize" class="block cursor-pointer">
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                Optimize Image
+                            </span>
+                            <p class="text-xs text-gray-500">Reduce file size while maintaining quality</p>
+                        </div>
+                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                            <input type="checkbox" 
+                                   id="optimize" 
+                                   name="optimize" 
+                                   class="form-checkbox h-5 w-5 text-indigo-600 transition-colors duration-200 ease-in-out rounded border-gray-300 focus:ring-indigo-500 cursor-pointer">
+                        </div>
+                    </div>
+                </label>
+
+                <label for="removeBackground" class="block cursor-not-allowed opacity-75">
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+                        <div>
+                            <span class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                Remove Background
+                                <span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Coming Soon</span>
+                            </span>
+                            <p class="text-xs text-gray-500">Automatically remove image background</p>
+                        </div>
+                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                            <input type="checkbox" id="removeBackground" name="removeBackground" disabled class="form-checkbox h-5 w-5 text-gray-400 transition-colors duration-200 ease-in-out rounded border-gray-300 cursor-not-allowed">
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }} 
