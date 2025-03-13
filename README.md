@@ -50,12 +50,9 @@ services:
     environment:
       TZ: Asia/Shanghai
       TIME_ZONE: Asia/Shanghai
-      PORT: 端口
     ports:
-      - 端口:端口
+      - 端口:8081
     volumes:
-      - 缓存:/app/tmp
-      - 文档缓存:/tmp
       # 下面3个是汉化文件的目录
       - /templates/components:/app/templates/components
       - /templates/js:/app/templates/js
@@ -74,8 +71,10 @@ services:
     restart: always
     tty: true
     stdin_open: true
+    ## 下面两行限制资源，可以不用
     cpus: 1
     mem_limit: 512m
+    # 下面部分限制日志，可以不用
     logging:
       driver: json-file
       options:
@@ -84,13 +83,11 @@ services:
     environment:
       TZ: Asia/Shanghai
       TIME_ZONE: Asia/Shanghai
-      PORT: 端口
     ports:
-      - 端口:端口
-    volumes:
-      - 缓存:/app/tmp
-      - 文档缓存:/tmp
+      - 端口:8081
 ```
+## 补充部署说明
+使用环境变量 `PORT`来指定端口，不指定使用默认端口 `8081`
 
 # 微信
 
