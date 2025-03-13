@@ -3,7 +3,7 @@
      :class="{ 'bg-darkSurface border border-darkBorder': darkMode, 'bg-white': !darkMode }">
     <div class="space-y-6">
         <div class="pb-4 border-b" :class="{ 'border-darkBorder': darkMode, 'border-gray-200': !darkMode }">
-            <h3 class="text-lg font-medium mb-4" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">Basic Options</h3>
+            <h3 class="text-lg font-medium mb-4" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">基本选项</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="group cursor-pointer">
                     <label for="formatSelect" class="block text-sm font-medium mb-1 cursor-pointer"
@@ -12,7 +12,7 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            Output Format
+                            输出格式
                         </span>
                     </label>
                     <div class="relative">
@@ -23,15 +23,15 @@
                                     'bg-white border-gray-300 hover:border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                                 }">
                             <optgroup label="Image Formats" :class="{ 'text-darkTextPrimary bg-darkInput': darkMode }">
-                                <option value="jpeg">JPEG - Best for photos</option>
-                                <option value="png">PNG - Best for graphics</option>
-                                <option value="webp">WebP - Modern web format</option>
-                                <option value="gif">GIF - Simple animations</option>
-                                <option value="bmp">BMP - Basic format</option>
-                                <option value="heic">HEIC - High efficiency</option>
+                                <option value="jpeg">JPEG - 最适用于照片</option>
+                                <option value="png">PNG - 最适用于图形</option>
+                                <option value="webp">WebP - 现代网页格式</option>
+                                <option value="gif">GIF - 简单动画</option>
+                                <option value="bmp">BMP - 一种基本图像格式</option>
+                                <option value="heic">HEIC - 高效图像文件格式</option>
                             </optgroup>
                             <optgroup label="Document Formats" :class="{ 'text-darkTextPrimary bg-darkInput': darkMode }">
-                                <option value="pdf">PDF - Portable Document Format</option>
+                                <option value="pdf">PDF - 可移植文档格式</option>
                             </optgroup>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
@@ -50,7 +50,7 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                             </svg>
-                            Quality Level
+                            质量等级
                         </span>
                     </label>
                     <div class="relative">
@@ -60,10 +60,10 @@
                                     'bg-darkInput border-darkBorder text-darkTextPrimary hover:bg-darkInputHover hover:border-darkAccent focus:bg-darkInputFocus focus:border-darkAccent focus:ring-1 focus:ring-darkAccent': darkMode,
                                     'bg-white border-gray-300 hover:border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                                 }">
-                            <option value="lossless">Lossless - Perfect quality</option>
-                            <option value="high">High - 90% quality</option>
-                            <option value="medium" selected>Medium - 75% quality</option>
-                            <option value="low">Low - 60% quality</option>
+                            <option value="lossless">无损 - 完美质量</option>
+                            <option value="high">高质量 - 90% 质量</option>
+                            <option value="medium" selected>中等质量 - 75% 质量</option>
+                            <option value="low">低质量 - 60% 质量</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
                              :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
@@ -82,14 +82,14 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                     </svg>
-                    Resize Image
+                    调整图像大小
                 </span>
             </h3>
             <div class="space-y-3">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="relative group">
                         <label for="widthInput" class="block text-sm font-medium mb-1"
-                               :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">Width</label>
+                               :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">宽度</label>
                         <input type="number" id="widthInput" name="width" min="1" max="8192" placeholder="Width (px)"
                                class="mt-1 block w-full pl-3 pr-10 py-2 rounded-md shadow-sm transition-colors"
                                :class="{ 
@@ -101,7 +101,7 @@
                     </div>
                     <div class="relative group">
                         <label for="heightInput" class="block text-sm font-medium mb-1"
-                               :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">Height</label>
+                               :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">高度</label>
                         <input type="number" id="heightInput" name="height" min="1" max="8192" placeholder="Height (px)"
                                class="mt-1 block w-full pl-3 pr-10 py-2 rounded-md shadow-sm transition-colors"
                                :class="{ 
@@ -119,9 +119,9 @@
                                 'bg-darkInput border-darkBorder text-darkTextPrimary hover:bg-darkInputHover hover:border-darkAccent focus:bg-darkInputFocus focus:border-darkAccent focus:ring-1 focus:ring-darkAccent': darkMode,
                                 'bg-white border-gray-300 hover:border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                             }">
-                        <option value="fit" selected>Fit - Maintain aspect ratio</option>
-                        <option value="fill">Fill - Crop to fit</option>
-                        <option value="stretch">Stretch - Exact dimensions</option>
+                        <option value="fit" selected>适应 - 保持纵横比</option>
+                        <option value="fill">填充 - 裁剪以适应</option>
+                        <option value="stretch">拉伸 - 精确尺寸</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
                          :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
@@ -131,13 +131,13 @@
                     </div>
                 </div>
                 <p class="text-xs" :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
-                    Leave dimensions empty to maintain original size
+                    保留原始尺寸
                 </p>
             </div>
         </div>
 
         <div class="space-y-4">
-            <h3 class="text-lg font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">Advanced Options</h3>
+            <h3 class="text-lg font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">高级选项</h3>
             <div class="space-y-4">
                 <label for="optimize" class="block cursor-pointer">
                     <div class="flex items-center justify-between p-3 rounded-lg transition-colors"
@@ -151,10 +151,10 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
-                                Optimize Image
+                                优化图像
                             </span>
                             <p class="text-xs" :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
-                                Reduce file size while maintaining quality
+                                减小文件大小同时保持质量
                             </p>
                         </div>
                         <div class="relative inline-block w-10 mr-2 align-middle select-none">
@@ -181,11 +181,11 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
-                                Remove Background
-                                <span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Coming Soon</span>
+                                移除背景
+                                <span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">即将推出</span>
                             </span>
                             <p class="text-xs" :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
-                                Automatically remove image background
+                                自动移除图像背景
                             </p>
                         </div>
                         <div class="relative inline-block w-10 mr-2 align-middle select-none">

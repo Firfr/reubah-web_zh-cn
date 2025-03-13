@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function initializeBatchUpload() {
         if (!elements.batchUploadArea || !elements.batchImageInput) {
-            console.error("Required batch upload elements not found");
+            console.error("未找到所需的批量上传元素");
             return;
         }
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         
         if (files.length === 0) {
-            alert("Please select valid image files");
+            alert("请选择有效的图像文件");
             return;
         }
     
@@ -162,20 +162,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     await processFile(formData);
                     processed++;
                 } catch (error) {
-                    errors.push(`Failed to process ${file.name}: ${error.message}`);
+                    errors.push(`处理失败 ${file.name}: ${error.message}`);
                 }
                 
                 updateProgress(processed, total);
             }
 
             if (errors.length > 0) {
-                alert(`Batch processing completed with ${errors.length} errors:\n${errors.join('\n')}`);
+                alert(`批量处理完成，但存在 ${errors.length} 个错误:\n${errors.join('\n')}`);
             } else {
-                alert("Batch processing completed successfully!");
+                alert("批量处理成功完成！");
             }
         } catch (error) {
-            console.error("Batch processing error:", error);
-            alert("An error occurred during batch processing");
+            console.error("批量处理错误:", error);
+            alert("批量处理期间发生错误");
         }
     }
 
@@ -198,14 +198,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (!response.ok) {
-                throw new Error('PDF creation failed');
+                throw new Error('PDF 创建失败');
             }
 
             const blob = await response.blob();
             downloadFile(blob, `merged_${Date.now()}.pdf`);
         } catch (error) {
-            console.error('Error creating PDF:', error);
-            alert('Failed to create PDF: ' + error.message);
+            console.error('创建 PDF 时出错:', error);
+            alert('创建 PDF 失败: ' + error.message);
         }
     }
 
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!response.ok) {
                 const error = await response.json();
-                throw new Error(error.message || "Processing failed");
+                throw new Error(error.message || "处理失败");
             }
 
             const blob = await response.blob();
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
             downloadFile(processedBlob, filename);
             return true;
         } catch (error) {
-            console.error(`Error processing file: ${error.message}`);
+            console.error(`处理文件时出错: ${error.message}`);
             throw error;
         }
     }

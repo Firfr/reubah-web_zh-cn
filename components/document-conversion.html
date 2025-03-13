@@ -23,11 +23,11 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            Choose document
+                            选择文档
                         </span>
                     </label>
                     <p class="mt-2" :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
-                        or drag and drop your document here
+                        或在此处拖放您的文档
                     </p>
                     <input id="documentInput" type="file" accept=".pdf,.doc,.docx,.odt,.rtf,.txt" class="sr-only">
                 </div>
@@ -46,12 +46,12 @@
     <div class="p-6 rounded-lg shadow space-y-6 transition-colors"
          :class="{ 'bg-darkSurface border border-darkBorder': darkMode, 'bg-white': !darkMode }">
         <h3 class="text-lg font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">
-            Conversion Options
+            转换选项
         </h3>
         <div class="space-y-2">
             <label for="outputFormat" class="block text-sm font-medium"
                    :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                Output Format
+                   输出格式
             </label>
             <select id="outputFormat" name="format" 
                     class="mt-1 block w-full pl-3 pr-10 py-2 text-base rounded-md cursor-pointer transition-colors"
@@ -59,12 +59,12 @@
                         'bg-darkInput border-darkBorder text-darkTextPrimary hover:bg-darkInputHover hover:border-darkAccent focus:bg-darkInputFocus focus:border-darkAccent focus:ring-1 focus:ring-darkAccent': darkMode,
                         'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                     }">
-                <option value="pdf">PDF Document (.pdf)</option>
-                <option value="docx">Word Document (.docx)</option>
-                <option value="doc">Word 97-2003 Document (.doc)</option>
-                <option value="odt">OpenDocument Text (.odt)</option>
-                <option value="txt">Plain Text (.txt)</option>
-                <option value="rtf">Rich Text Format (.rtf)</option>
+                <option value="pdf">PDF 文档 (.pdf)</option>
+                <option value="docx">Word 文档 (.docx)</option>
+                <option value="doc">Word 97-2003 文档 (.doc)</option>
+                <option value="odt">开放标准文本 (.odt)</option>
+                <option value="txt">纯文本 (.txt)</option>
+                <option value="rtf">富文本格式 (.rtf)</option>
             </select>
         </div>
     </div>
@@ -75,7 +75,7 @@
                 'text-darkTextPrimary bg-darkAccent hover:bg-darkAccentHover focus:ring-darkAccent': darkMode,
                 'text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500': !darkMode 
             }">
-        Convert Document
+            转换文档
     </button>
 
     <div id="conversionProgress" class="hidden space-y-4">
@@ -84,7 +84,7 @@
             <div class="flex items-center justify-between mb-2">
                 <span class="text-sm font-medium" 
                       :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                    Converting Document
+                      正在转换文档
                 </span>
             </div>
             <div class="w-full rounded-full h-2" 

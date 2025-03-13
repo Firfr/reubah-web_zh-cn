@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function initializeImagePreview() {
     if (!elements.imageInput || !elements.uploadArea) {
-      console.error("Required preview elements not found");
+      console.error("未找到所需的预览元素");
       return;
     }
 
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isIco = isIcoFile(file);
     
     if (!isImage && !isHeic && !isIco) {
-        alert("Please select an image file");
+        alert("请选择一个图像文件");
         return;
     }
 
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 elements.uploadArea.classList.add("border-green-500");
                 if (elements.uploadText) {
-                    elements.uploadText.innerHTML = '<span class="text-green-500">HEIC file ready for processing</span>';
+                    elements.uploadText.innerHTML = '<span class="text-green-500">HEIC 文件已准备好处理</span>';
                 }
                 
                 // Force output format to something other than HEIC
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
             reader.readAsDataURL(conversionResult);
         }).catch(error => {
-            console.error('Error decoding HEIC:', error);
+            console.error('HEIC 解码错误:', error);
             // Fall back to server-side conversion if client-side fails
             serverSideHeicPreview(file);
         });
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
             img.style.backgroundColor = '#ffffff'; // Add white background for transparency
             elements.uploadArea.classList.add("border-green-500");
             if (elements.uploadText) {
-                elements.uploadText.innerHTML = '<span class="text-green-500">ICO file ready for processing</span>';
+                elements.uploadText.innerHTML = '<span class="text-green-500">ICO 文件已准备好处理</span>';
             }
             
             // Set PNG as default output for ICO
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
             body: formData
         });
 
-        if (!response.ok) throw new Error('Failed to convert HEIC for preview');
+        if (!response.ok) throw new Error('无法转换 HEIC 以进行预览');
 
         // Get the converted image blob
         const blob = await response.blob();
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
             URL.revokeObjectURL(img.src);
         };
     } catch (error) {
-        console.error('Error previewing HEIC:', error);
+        console.error('预览 HEIC 时出错:', error);
         img.src = '/static/images/heic-placeholder.svg';
         img.alt = 'HEIC preview failed';
     }
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     elements.uploadArea.classList.add("border-green-500");
     if (elements.uploadText) {
-        elements.uploadText.innerHTML = '<span class="text-green-500">HEIC file ready for processing</span>';
+        elements.uploadText.innerHTML = '<span class="text-green-500">HEIC 文件已准备好处理</span>';
     }
     
     // Force output format to something other than HEIC
@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     elements.uploadArea.classList.add("border-green-500");
     if (elements.uploadText) {
-      elements.uploadText.innerHTML = '<span class="text-green-500">File ready for processing</span>';
+      elements.uploadText.innerHTML = '<span class="text-green-500">文件已准备好处理</span>';
     }
 
     // Update dimension inputs with placeholders
@@ -263,16 +263,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
-                    Choose a file
+                    选择一个文件
                 </span>
             </label>
-            <p class="text-gray-500">or drag and drop your image here</p>
+            <p class="text-gray-500">或将您的图像拖放到此处</p>
         `;
     }
 
     // Reset dimension input placeholders
-    if (elements.widthInput) elements.widthInput.placeholder = "Width (px)";
-    if (elements.heightInput) elements.heightInput.placeholder = "Height (px)";
+    if (elements.widthInput) elements.widthInput.placeholder = "宽度 (px)";
+    if (elements.heightInput) elements.heightInput.placeholder = "高度 (px)";
     
     // Re-initialize event listeners
     setupEventListeners();

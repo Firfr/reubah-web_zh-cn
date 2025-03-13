@@ -23,11 +23,11 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            Choose files
+                            选择文件
                         </span>
                     </label>
                     <p class="mt-2" :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
-                        or drag and drop your images here
+                        或者将您的图片拖放到这里
                     </p>
                     <input id="batchImageInput" type="file" multiple accept="image/*,.heic,.heif" class="sr-only">
                 </div>
@@ -44,11 +44,11 @@
     <div class="p-6 rounded-lg shadow space-y-6 transition-colors"
          :class="{ 'bg-darkSurface border border-darkBorder': darkMode, 'bg-white': !darkMode }">
         <h3 class="text-lg font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">
-            Batch Processing Options
+            批量处理选项
         </h3>
         <div class="space-y-4">
             <label class="block text-sm font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                Processing Mode
+                处理模式
             </label>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label class="relative flex cursor-pointer rounded-lg border p-4 shadow-sm focus:outline-none"
@@ -69,7 +69,7 @@
                                       'text-gray-900': !darkMode && processingMode !== 'individual',
                                       'text-indigo-900': !darkMode && processingMode === 'individual'
                                   }">
-                                Process Individually
+                                  逐个处理
                             </span>
                             <span class="mt-1 flex items-center text-sm" 
                                   :class="{ 
@@ -78,7 +78,7 @@
                                       'text-gray-500': !darkMode && processingMode !== 'individual',
                                       'text-indigo-500': !darkMode && processingMode === 'individual'
                                   }">
-                                Process each image separately
+                                  分别处理每张图像
                             </span>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                                       'text-gray-900': !darkMode && processingMode !== 'merge-pdf',
                                       'text-indigo-900': !darkMode && processingMode === 'merge-pdf'
                                   }">
-                                Merge to PDF
+                                  合并为PDF
                             </span>
                             <span class="mt-1 flex items-center text-sm" 
                                   :class="{ 
@@ -119,7 +119,7 @@
                                       'text-gray-500': !darkMode && processingMode !== 'merge-pdf',
                                       'text-indigo-500': !darkMode && processingMode === 'merge-pdf'
                                   }">
-                                Combine all images into one PDF
+                                  将所有图像合并为一个PDF文件
                             </span>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        Output Format
+                        输出格式
                     </span>
                 </label>
                 <div class="relative">
@@ -154,16 +154,16 @@
                                 'bg-white border-gray-300 hover:border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                             }">
                         <optgroup label="Image Formats">
-                            <option value="jpeg">JPEG - Best for photos</option>
-                            <option value="png">PNG - Best for graphics</option>
-                            <option value="webp">WebP - Modern web format</option>
-                            <option value="gif">GIF - Simple animations</option>
-                            <option value="bmp">BMP - Basic format</option>
-                            <option value="heic">HEIC - High efficiency</option>
-                            <option value="ico">ICO - Windows icon format</option>
+                            <option value="jpeg">JPEG - 最适用于照片</option>
+                            <option value="png">PNG - 最适用于图形</option>
+                            <option value="webp">WebP - 现代网页格式</option>
+                            <option value="gif">GIF - 简单动画</option>
+                            <option value="bmp">BMP - 一种基本图像格式</option>
+                            <option value="heic">HEIC - 高效图像文件格式</option>
+                            <option value="ico">ICO - Windows图标格式</option>
                         </optgroup>
                         <optgroup label="Document Formats">
-                            <option value="pdf">PDF - Portable Document Format</option>
+                            <option value="pdf">PDF - 可移植文档格式</option>
                         </optgroup>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
@@ -178,7 +178,7 @@
                 <div class="relative group">
                     <label for="batchWidthInput" class="block text-sm font-medium mb-1"
                            :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                        Width
+                           宽度
                     </label>
                     <input type="number" 
                            id="batchWidthInput" 
@@ -195,7 +195,7 @@
                 <div class="relative group">
                     <label for="batchHeightInput" class="block text-sm font-medium mb-1"
                            :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                        Height
+                           高度
                     </label>
                     <input type="number" 
                            id="batchHeightInput" 
@@ -217,13 +217,13 @@
                  :class="{ 'bg-darkInput': darkMode, 'bg-gray-50': !darkMode }">
                 <div class="flex items-center justify-between">
                     <h4 class="text-sm font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">
-                        PDF Options
+                        PDF 选项
                     </h4>
                 </div>
                 
                 <div>
                     <label for="pdfPageSize" class="block text-sm font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                        Page Size
+                        页面大小
                     </label>
                     <select id="pdfPageSize" name="pageSize" 
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base rounded-md transition-colors cursor-pointer"
@@ -231,15 +231,15 @@
                                 'bg-darkInput border-darkBorder text-darkTextPrimary hover:bg-darkInputHover hover:border-darkAccent focus:bg-darkInputFocus focus:border-darkAccent focus:ring-1 focus:ring-darkAccent': darkMode,
                                 'bg-white border-gray-300 hover:border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                             }">
-                        <option value="A4">A4 (210 × 297 mm)</option>
-                        <option value="letter">Letter (8.5 × 11 in)</option>
-                        <option value="legal">Legal (8.5 × 14 in)</option>
+                        <option value="A4">A4 (210 × 297 毫米)</option>
+                        <option value="letter">Letter (8.5 × 11 英寸)</option>
+                        <option value="legal">Legal (8.5 × 14 英寸)</option>
                     </select>
                 </div>
 
                 <div>
                     <label for="pdfOrientation" class="block text-sm font-medium" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                        Orientation
+                        页面方向
                     </label>
                     <select id="pdfOrientation" name="orientation" 
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base rounded-md transition-colors cursor-pointer"
@@ -247,15 +247,15 @@
                                 'bg-darkInput border-darkBorder text-darkTextPrimary hover:bg-darkInputHover hover:border-darkAccent focus:bg-darkInputFocus focus:border-darkAccent focus:ring-1 focus:ring-darkAccent': darkMode,
                                 'bg-white border-gray-300 hover:border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                             }">
-                        <option value="auto">Auto (Based on image)</option>
-                        <option value="portrait">Portrait</option>
-                        <option value="landscape">Landscape</option>
+                        <option value="auto">自动（基于图像）</option>
+                        <option value="portrait">竖版</option>
+                        <option value="landscape">横向</option>
                     </select>
                 </div>
 
                 <div>
                     <label for="imagesPerPage" class="block text-sm font-medium cursor-pointer" :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                        Images Per Page
+                        每页图像数量
                     </label>
                     <select id="imagesPerPage" name="imagesPerPage" 
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base rounded-md transition-colors cursor-pointer"
@@ -263,9 +263,9 @@
                                 'bg-darkInput border-darkBorder text-darkTextPrimary hover:bg-darkInputHover hover:border-darkAccent focus:bg-darkInputFocus focus:border-darkAccent focus:ring-1 focus:ring-darkAccent': darkMode,
                                 'bg-white border-gray-300 hover:border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500': !darkMode 
                             }">
-                        <option value="1">1 image per page</option>
-                        <option value="2">2 images per page</option>
-                        <option value="4">4 images per page</option>
+                        <option value="1">每页1张图像</option>
+                        <option value="2">每页2张图像</option>
+                        <option value="4">每页4张图像</option>
                     </select>
                 </div>
             </div>
@@ -278,7 +278,7 @@
                 'text-darkTextPrimary bg-darkAccent hover:bg-darkAccentHover focus:ring-darkAccent': darkMode,
                 'text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500': !darkMode 
             }">
-        <span x-text="processingMode === 'merge-pdf' ? 'Create PDF' : 'Process Images'"></span>
+        <span x-text="processingMode === 'merge-pdf' ? '创建 PDF' : '处理图像'"></span>
     </button>
 
     <div id="batchProgress" class="hidden space-y-4">
@@ -287,10 +287,10 @@
             <div class="flex items-center justify-between mb-2">
                 <span class="text-sm font-medium" 
                       :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-700': !darkMode }">
-                    Processing Progress
+                      处理进度
                 </span>
                 <span id="batchProgressCount" class="text-sm" :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
-                    0/0 files
+                    0/0 文件
                 </span>
             </div>
             <div class="w-full rounded-full h-2" 
