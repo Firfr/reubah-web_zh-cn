@@ -6,4 +6,4 @@ COPY --chown=appuser:appuser --chmod=777 components /app/templates/components
 COPY --chown=appuser:appuser --chmod=777 js /app/templates/js
 COPY --chown=appuser:appuser --chmod=777 pages /app/templates/pages
 
-# docker build -t firfe/reubah:24.12.20 .
+# docker build -t firfe/reubah:2025.01.19 .
