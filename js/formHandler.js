@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Validate required elements
   if (!elements.form || !elements.form.querySelector('input[type="file"]')) {
-    console.error("未找到所需的表单元素");
+    console.error("Required form elements not found");
     return;
   }
 
@@ -84,28 +84,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function validateFile() {
     if (!fileInput.files || !fileInput.files.length) {
-      showError("请选择一个图像文件");
-      return false;
+        showError("Please select an image file first");
+        return false;
     }
 
     const file = fileInput.files[0];
     if (file.size > MAX_FILE_SIZE) {
-      showError("文件大小超出 32MB 限制");
-      return false;
+        showError("File size exceeds 32MB limit");
+        return false;
+    }
+
+    const isImage = file.type.startsWith('image/');
+    const isHeic = isHeicFile(file);
+    const isIco = isIcoFile(file);
+    
+    if (!isImage && !isHeic && !isIco) {
+        showError("Please select a valid image file");
+        return false;
     }
 
     return true;
   }
 
+  function isHeicFile(file) {
+    const ext = file.name.split('.').pop().toLowerCase();
+    return ext === 'heic' || ext === 'heif' || file.type === 'image/heic' || file.type === 'image/heif';
+  }
+
+  function isIcoFile(file) {
+    const ext = file.name.split('.').pop().toLowerCase();
+    return ext === 'ico' || file.type === 'image/x-icon' || file.type === 'image/vnd.microsoft.icon';
+  }
+
   function createFormData() {
     const formData = new FormData();
-    formData.append("image", fileInput.files[0]);
+    const file = fileInput.files[0];
     
-    // Add processing options
-    if (elements.formatSelect) {
-      formData.append("format", elements.formatSelect.value || "jpeg");
+    // Handle special file types
+    if (isHeicFile(file)) {
+      const heicBlob = new Blob([file], { type: 'image/heic' });
+      formData.append("image", heicBlob, file.name);
+      formData.append("sourceFormat", "heic");
+      
+      // Always convert HEIC to a different format
+      const outputFormat = elements.formatSelect?.value;
+      if (!outputFormat || outputFormat === "heic") {
+        formData.append("format", "jpeg"); // Default to JPEG
+      } else {
+        formData.append("format", outputFormat);
+      }
+    } else if (isIcoFile(file)) {
+      const icoBlob = new Blob([file], { type: 'image/x-icon' });
+      formData.append("image", icoBlob, file.name);
+      formData.append("sourceFormat", "ico");
+      
+      // Default to PNG for ICO files if not specified
+      const outputFormat = elements.formatSelect?.value;
+      if (!outputFormat || outputFormat === "ico") {
+        formData.append("format", "png"); // Default to PNG
+      } else {
+        formData.append("format", outputFormat);
+      }
+    } else {
+      formData.append("image", file);
+      formData.append("format", elements.formatSelect?.value || "jpeg");
     }
-    if (elements.qualitySelect) {
+    
+    // Add other options
+    if (elements.qualitySelect?.value) {
       formData.append("quality", elements.qualitySelect.value);
     }
     if (elements.widthInput?.value) {
@@ -124,6 +170,11 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("optimize", "true");
     }
 
+    // Log form data for debugging
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+
     return formData;
   }
 
@@ -133,24 +184,31 @@ document.addEventListener("DOMContentLoaded", function () {
     if (submitButton) submitButton.disabled = true;
 
     try {
-      const response = await fetch("/process", {
-        method: "POST",
-        body: formData
-      });
+        // Log the FormData contents for debugging
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || "处理失败");
-      }
+        const response = await fetch("/process", {
+            method: "POST",
+            body: formData
+        });
 
-      await handleSuccess(response, elements.formatSelect?.value || "jpeg");
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ message: "Unknown error occurred" }));
+            console.error("Server response:", errorData);
+            throw new Error(errorData.error?.message || errorData.message || "Processing failed");
+        }
+
+        await handleSuccess(response, elements.formatSelect?.value || "jpeg");
     } catch (error) {
-      showError(error.message || "图像处理失败");
+        console.error("Processing error:", error);
+        showError(error.message || "Failed to process image");
     } finally {
-      hideProgress();
-      if (submitButton) submitButton.disabled = false;
+        hideProgress();
+        if (submitButton) submitButton.disabled = false;
     }
-  }
+}
 
   function showProgress() {
     if (elements.progress) {
@@ -188,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function handleSuccess(response, format) {
     if (!elements.result) {
-      console.error("未找到结果元素");
+      console.error("Result element not found");
       return;
     }
 
@@ -202,11 +260,11 @@ document.addEventListener("DOMContentLoaded", function () {
       resultPreview.innerHTML = `<img src="${url}" alt="Processed image" class="max-w-full rounded-lg">`;
       resultInfo.innerHTML = `
         <div class="flex justify-between items-center">
-          <p class="text-sm text-gray-600">文件大小: ${(blob.size / 1024).toFixed(2)} KB</p>
+          <p class="text-sm text-gray-600">Size: ${(blob.size / 1024).toFixed(2)} KB</p>
           <a href="${url}" 
              download="processed.${format}" 
              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            下载图片
+            Download Image
           </a>
         </div>
       `;

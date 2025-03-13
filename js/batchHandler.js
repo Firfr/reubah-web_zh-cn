@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function initializeBatchUpload() {
         if (!elements.batchUploadArea || !elements.batchImageInput) {
-            console.error("未找到所需的批量上传元素");
+            console.error("Required batch upload elements not found");
             return;
         }
 
@@ -52,13 +52,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function handleFileSelect(e) {
-        const files = Array.from(e.target.files).filter(file => file.type.startsWith("image/"));
+        const files = Array.from(e.target.files).filter(file => {
+            const isImage = file.type.startsWith("image/");
+            const isHeic = file.name.toLowerCase().endsWith('.heic') || 
+                          file.name.toLowerCase().endsWith('.heif');
+            return isImage || isHeic;
+        });
         
         if (files.length === 0) {
-            alert("请选择有效的图像文件");
+            alert("Please select valid image files");
             return;
         }
-
+    
         state.files = files;
         updateFileList();
         elements.batchProcessBtn.disabled = false;
@@ -68,10 +73,18 @@ document.addEventListener("DOMContentLoaded", function () {
         elements.batchFileList.innerHTML = state.files.map((file, index) => `
             <div class="flex items-center justify-between py-2">
                 <div class="flex items-center">
-                    <span class="text-sm font-medium text-gray-900">${file.name}</span>
-                    <span class="ml-2 text-sm text-gray-500">(${(file.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                    <span class="text-sm font-medium transition-colors" 
+                          :class="{ 'text-darkTextPrimary': darkMode, 'text-gray-900': !darkMode }">
+                        ${file.name}
+                    </span>
+                    <span class="ml-2 text-sm transition-colors" 
+                          :class="{ 'text-darkTextSecondary': darkMode, 'text-gray-500': !darkMode }">
+                        (${(file.size / (1024 * 1024)).toFixed(2)} MB)
+                    </span>
                 </div>
-                <button onclick="removeFile(${index})" class="text-red-500 hover:text-red-700">
+                <button onclick="removeFile(${index})" 
+                        class="transition-colors hover:text-red-700"
+                        :class="{ 'text-red-400': darkMode, 'text-red-500': !darkMode }">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -149,20 +162,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     await processFile(formData);
                     processed++;
                 } catch (error) {
-                    errors.push(`处理失败 ${file.name}: ${error.message}`);
+                    errors.push(`Failed to process ${file.name}: ${error.message}`);
                 }
                 
                 updateProgress(processed, total);
             }
 
             if (errors.length > 0) {
-                alert(`批量处理完成，但存在 ${errors.length} 个错误:\n${errors.join('\n')}`);
+                alert(`Batch processing completed with ${errors.length} errors:\n${errors.join('\n')}`);
             } else {
-                alert("批量处理成功完成！");
+                alert("Batch processing completed successfully!");
             }
         } catch (error) {
-            console.error("批量处理错误:", error);
-            alert("批量处理期间发生错误");
+            console.error("Batch processing error:", error);
+            alert("An error occurred during batch processing");
         }
     }
 
@@ -185,14 +198,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (!response.ok) {
-                throw new Error('PDF 创建失败');
+                throw new Error('PDF creation failed');
             }
 
             const blob = await response.blob();
             downloadFile(blob, `merged_${Date.now()}.pdf`);
         } catch (error) {
-            console.error('创建 PDF 时出错:', error);
-            alert('创建 PDF 失败: ' + error.message);
+            console.error('Error creating PDF:', error);
+            alert('Failed to create PDF: ' + error.message);
         }
     }
 
@@ -205,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!response.ok) {
                 const error = await response.json();
-                throw new Error(error.message || "处理失败");
+                throw new Error(error.message || "Processing failed");
             }
 
             const blob = await response.blob();
@@ -226,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
             downloadFile(processedBlob, filename);
             return true;
         } catch (error) {
-            console.error(`处理文件时出错: ${error.message}`);
+            console.error(`Error processing file: ${error.message}`);
             throw error;
         }
     }
@@ -239,6 +252,9 @@ document.addEventListener("DOMContentLoaded", function () {
             'webp': 'image/webp',
             'gif': 'image/gif',
             'bmp': 'image/bmp',
+            'heic': 'image/heic',
+            'heif': 'image/heif',
+            'ico': 'image/x-icon',
             'pdf': 'application/pdf'
         };
         return contentTypes[format] || 'application/octet-stream';
@@ -272,4 +288,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     initializeBatchUpload();
-}); 
+});
