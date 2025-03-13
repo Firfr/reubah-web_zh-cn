@@ -1,7 +1,11 @@
 > 翻译的不是源代码,是编译后的 `templates`文件
 
 这是项目[reubah](https://github.com/dendianugerah/reubah)的汉化。  
-原项目目前没有发布明确的版本，这个是2024年12月20日翻译的，在这个时间后如果原项目中的`templates`目录有修改，这个汉化可能不能使用，请注意甄别！！
+原项目目前没有发布明确的版本，当前汉化的镜像是2025-01-19打包的，在2025年3月14日之前，这个镜像是最新的，如果之后镜像有更新这个汉化可能不能使用，请注意甄别！！
+查看镜像打包时间等信息得到命令
+```bash
+docker inspect 镜像名称
+```
 
 
 ## 翻译说明
@@ -17,7 +21,13 @@
 # 使用说明
 
 ## 替换汉化文件
-下载本项目的`24.12.20`的发行版文件,将其中的`components`、`js`、`pages`目录映射到容器中的`/app/templates/`目录中的同名目录。
+下载本项目的`25.01.19`的发行版文件,将其中的`components`、`js`、`pages`目录映射到容器中的`/app/templates/`目录中的同名目录。
+
+## 增加内容
+- 增加ICO格式的支持
+- 增加HEIC格式的支持
+- 增加黑夜模式
+- 更新图标
 
 挂载示例
 ```yml
@@ -59,7 +69,7 @@ services:
 services:
   reubah:
     container_name: reubah
-    image: firfe/reubah:24.12.20
+    image: firfe/reubah:25.01.19
     network_mode: bridge
     restart: always
     tty: true
