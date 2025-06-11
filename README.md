@@ -1,94 +1,188 @@
-> 翻译的不是源代码,是编译后的 `templates`文件
+# Reubah - Universal File Converter & Image Processor 全能文件转换器 & 图像处理器
 
-这是项目[reubah](https://github.com/dendianugerah/reubah)的汉化。  
-原项目目前没有发布明确的版本，当前汉化的镜像是2025-01-19打包的，在2025年3月14日之前，这个镜像是最新的，如果之后镜像有更新这个汉化可能不能使用，请注意甄别！！
-查看镜像打包时间等信息得到命令
+a simple web-based tool for processing images and converting documents with a simple interface  
+一个简单易用的基于网页的工具，用于处理图像和转换文档，配有简洁的界面。
+
+## Features 功能
+
+- [x] File Converter (Keep on adding more formats)  
+  文件转换器（持续新增更多格式）
+- [x] Dark Mode  
+  深色模式 / 暗黑模式
+- [ ] API
+- [ ] Background Removal for Images  
+  图像背景去除 / 图片去背景功能
+
+## 部署说明
+
+当前汉化仅适用于 2025.06.11 之前的更新：
+
+首先感谢原作者的开源。[原项目地址](https://github.com/dendianugerah/reubah)
+
+具体汉化了那些内容，请参考[翻译说明](./翻译说明.md)。
+
+只做了汉化和简单修改，有问题，请到原作者仓库处反馈。
+
+有需要帮忙部署这个项目的朋友,一杯奶茶,即可程远程帮你部署，需要可联系。  
+微信号 `E-0_0-`  
+闲鱼搜索用户 `明月人间`  
+或者邮箱 `firfe163@163.com`  
+如果这个项目有帮到你。欢迎start。
+
+有其他的项目的汉化需求，欢迎提issue。或其他方式联系通知。
+
+### 镜像
+
+从阿里云或华为云镜像仓库拉取镜像，注意填写镜像标签，镜像仓库中没有`latest`标签
+
+容器内部端口 8081，可通过环境变量 `PORT` 自定义端口，需要将容器的缓存目录`/tmp`映射出来
+
 ```bash
-docker inspect 镜像名称
+swr.cn-north-4.myhuaweicloud.com/firfe/reubah:2025.06.11
 ```
 
+### docker run 命令部署
 
-## 翻译说明
-首先感谢原作者的开源。  
-本人不会英语，翻译此项目，只是自己有需求，但是发现这个项目没有提供中文，因此翻译了此项目；  
-项目的所有英文翻译都是用 **通义千问** 通过问答的形式翻译的，如有不准确，请指出；  
-本人提供这个项目在 NAS、服务器等的有偿远程部署服务，15元/次。有意者可联系。  
-微信号 `E-0_0-` 二维码在最后  
-闲鱼搜索 `明月人间`
+```bash
+docker run -d \
+--name reubah \
+--network bridge \
+--restart always \
+--log-opt max-size=1m \
+--log-opt max-file=1 \
+-v ./doc-temp:/tmp -p 3000:8081 \
+swr.cn-north-4.myhuaweicloud.com/firfe/reubah:2025.06.11
+```
+### compose 文件部署 👍推荐
 
-具体翻译了哪些内容,请阅读[翻译说明](./翻译说明.md)
-
-# 使用说明
-
-## 替换汉化文件
-下载本项目的`25.01.19`的发行版文件,将其中的`components`、`js`、`pages`目录映射到容器中的`/app/templates/`目录中的同名目录。
-
-## 增加内容
-- 增加ICO格式的支持
-- 增加HEIC格式的支持
-- 增加黑夜模式
-- 更新图标
-
-挂载示例
-```yml
+```yaml
+#version: '3.9'
 services:
   reubah:
     container_name: reubah
-    # ghcr.nju.edu.cn 是国内的ghcr.io镜像地址
-    image: ghcr.nju.edu.cn/dendianugerah/reubah:latest
+    image: swr.cn-north-4.myhuaweicloud.com/firfe/reubah:2025.06.11
     network_mode: bridge
     restart: always
-    tty: true
-    stdin_open: true
-    cpus: 1
-    mem_limit: 512m
     logging:
-      driver: json-file
       options:
         max-size: 1m
-        max-file: "3"
-    environment:
-      TZ: Asia/Shanghai
-      TIME_ZONE: Asia/Shanghai
+        max-file: '1'
     ports:
-      - 端口:8081
+      - 3000:8081
     volumes:
-      # 下面3个是汉化文件的目录
-      - /templates/components:/app/templates/components
-      - /templates/js:/app/templates/js
-      - /templates/pages:/app/templates/pages
+      - ./doc-temp:/tmp
 ```
 
-## 直接使用我编译的镜像
-可以直接下载并使用我编译的汉化镜像,镜像在发行的额版本中
-部署示例
-```yml
-services:
-  reubah:
-    container_name: reubah
-    image: firfe/reubah:25.01.19
-    network_mode: bridge
-    restart: always
-    tty: true
-    stdin_open: true
-    ## 下面两行限制资源，可以不用
-    cpus: 1
-    mem_limit: 512m
-    # 下面部分限制日志，可以不用
-    logging:
-      driver: json-file
-      options:
-        max-size: 1m
-        max-file: "3"
-    environment:
-      TZ: Asia/Shanghai
-      TIME_ZONE: Asia/Shanghai
-    ports:
-      - 端口:8081
+## 修改说明
+
+这里对除了汉化之外的代码修改的说明。  
+增加修改部分具体见 [修改说明](./修改说明.md)。
+
+`./README.md` 文件翻译，增加 `## 部署说明`、`## 修改说明`、`## 效果截图` 部分。
+
+增加目录 `./图片` `./remote_files`(引用的远程文件)
+新增文件 `./.dockerignore`、`./Dockerfile`、`./翻译说明.md`、`./修改说明.md`、`./本地调试命令记录.md` 
+
+## 效果截图
+
+
+| 图像处理 | 文档处理 | 批量处理 |
+|:-:|:-:|:-:|
+| ![图像处理](图片/图像处理.png) | ![文档处理](图片/文档处理.png) | ![批量处理](图片/批量处理.png) |
+
+## Quick Start 快速开始
+
+### Using Docker 使用 Docker
+```bash
+git clone https://github.com/dendianugerah/reubah.git
+cd reubah
+docker-compose up -d
 ```
-## 补充部署说明
-使用环境变量 `PORT`来指定端口，不指定使用默认端口 `8081`
+or create a folder for the project and run  
+或为项目创建一个文件夹并运行
+```bash
+docker run -d --name reubah -p 8081:8081 \
+  -v doc-temp:/tmp -e PORT=8081 \
+  --restart unless-stopped ghcr.io/dendianugerah/reubah:latest
+```
+Access at 浏览器打开: `http://localhost:8081`
 
-# 微信
+### Local Development 本地开发
+Requirements 要求:
+- Go 1.22+
+- LibreOffice (for document conversion 文档转换的要求)
+- GCC/G++
 
-![微信](./微信.png)
+```bash
+go mod download
+go run cmd/server/main.go
+```
+
+## Images 效果图
+
+Here are some images related to the project:  
+以下是与项目相关的一些图像
+
+![Home](static/assets/home.png)
+![Document Processing](static/assets/document.png)
+![Merge](static/assets/merge.png)
+
+## Format Support & Compatibility 格式转换矩阵
+
+> **Matrix Guide 矩阵指南:**
+> - Find your source format in the left column  
+    在左列中找到您的源格式
+> - Follow the row to find available output formats  
+    沿行查找可用的输出格式
+> - ✅ = Supported conversion 支持的转换
+> - `-` = Same format (no conversion needed) 
+
+### Image Conversion Matrix 图像转换矩阵
+
+| From ➡️ To ⬇️ | JPG/JPEG | PNG | WebP | GIF | BMP | HEIC/HEIF | PDF |
+|--------------|:---:|:---:|:----:|:---:|:---:|:---:| :---: |
+| **JPG/JPEG** | -   | ✅  | ✅   | ✅  | ✅ | ❌ | ✅   |
+| **PNG**      | ✅  | -   | ✅   | ✅  | ✅  | ❌ | ✅  |
+| **WebP**     | ✅  | ✅  | -    | ✅  | ✅  | ❌ | ✅  |
+| **GIF**      | ✅  | ✅  | ✅   | -   | ✅  | ❌ | ✅  |
+| **BMP**      | ✅  | ✅  | ✅   | ✅  | -   | ❌| ✅   |
+| **HEIC/HEIF**| ✅  | ✅  | ✅   | ✅  | ✅  | - | ✅   |
+
+### Document Conversion Matrix 文档转换矩阵
+
+| From ➡️ To ⬇️ | PDF | DOCX | DOC | ODT | RTF | TXT |
+|--------------|:---:|:----:|:---:|:---:|:---:|:---:|
+| **PDF**<br>(from PDF currently still bad<br>从 PDF 当前转换效果仍不佳)     | -   | ✅   | ✅  | ❌  | ❌  | ❌  |
+| **DOCX**     | ✅  | -    | ✅  | ✅  | ✅  | ✅  |
+| **DOC**      | ✅  | ✅   | -   | ✅  | ✅  | ✅  |
+| **ODT**      | ✅  | ✅   | ✅  | -   | ✅  | ✅  |
+| **RTF**      | ✅  | ✅   | ✅  | ✅  | -   | ✅  |
+| **TXT**      | ✅  | ✅   | ✅  | ✅  | ✅  | -   |
+
+### Additional Image Features 额外的图像功能
+
+| Format | Background Removal (Soon) | Optimization | Batch Processing |
+|--------|:-----------------:|:------------:|:---------------:|
+| 格式 | 背景移除 (即将推出) | 优化 | 批量处理 |
+| JPG/JPEG | ❌              | ✅           | ✅              |
+| PNG    | ❌                | ❌           | ✅              |
+| WebP   | ❌                | ❌           | ✅              |
+| GIF    | ❌                | ❌           | ✅              |
+| BMP    | ❌                | ❌           | ✅              |
+| HEIC/HEIF | ❌             | ❌           | ✅              |
+
+## Notes 注意事项
+
+- Isolated processing environment  
+  隔离的处理环境：每个文件在独立的环境中进行处理，确保安全性和稳定性。
+- No file storage - immediate delivery  
+  无文件存储 - 立即交付：处理完成后，文件会立即发送给用户，系统中不留存任何副本。
+- Automatic cleanup  
+  自动清理：处理完成后，临时文件和数据会被自动删除，以保护用户隐私和释放资源。
+- Input validation  
+  输入验证：系统会对上传的文件进行验证，确保只处理符合要求的文件格式和大小。
+
+## License 许可证
+
+This project is licensed under the [MIT License](LICENSE).  
+本项目采用 MIT许可证 进行授权。
